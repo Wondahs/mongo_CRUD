@@ -29,7 +29,7 @@ This Node.js backend API uses MongoDB for managing a database and collection. It
 
    ```bash
    git clone https://github.com/Wondahs/mongo_CRUD.git
-   cd your-repository
+   cd mongo_CRUD
    ```
 
 2. Install dependencies:
