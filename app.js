@@ -5,6 +5,7 @@ const { ObjectId } = require('mongodb');
 
 const app = express();
 app.use(express.json());
+
 let db;
 // DB connection
 connectToDb((err) => {
@@ -19,13 +20,13 @@ connectToDb((err) => {
 
 app.get('/books', (req, res) => {
   const page = req.query.page || 0;
-  const booksPerPage = 2;
+  const booksPerPage = 20; // Feel free to modify 
 
   const books = [];
 
   db.collection('books')
     .find()
-    .sort({ author: 1 })
+    .sort({ author: 1 }) // You can also change sort filter to suit your needs
     .skip(page * booksPerPage)
     .limit(booksPerPage)
     .forEach(book => books.push(book))
