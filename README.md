@@ -39,10 +39,12 @@ This Node.js backend API uses MongoDB for managing a collection of books. It sup
    ```
 
 3. Set up environment variables:
-   - Create a `.env` file in the root directory and add your MongoDB connection string:
+   - Create a `.env` file in the root directory and add your MongoDB connection string, database name aand collection name:
 
      ```plaintext
      MONGO_URI=mongodb://localhost:27017
+     DB_NAME=bookstore
+     COLLECTION_NAME=books
      ```
 
 ### Running the Application

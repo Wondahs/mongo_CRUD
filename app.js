@@ -1,10 +1,12 @@
 const express = require('express');
+require('dotenv').config()
 
 const { connectToDb, getDb } = require('./db');
 const { ObjectId } = require('mongodb');
 
 const app = express();
 app.use(express.json());
+const COLLECTION_NAME = process.env.COLLECTION_NAME || 'books';
 
 let db;
 // DB connection
@@ -24,7 +26,7 @@ app.get('/books', (req, res) => {
 
   const books = [];
 
-  db.collection('books')
+  db.collection(COLLECTION_NAME)
     .find()
     .sort({ author: 1 }) // You can also change sort filter to suit your needs
     .skip(page * booksPerPage)
@@ -45,7 +47,7 @@ app.get('/books/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid book ID' });
   }
 
-  db.collection('books')
+  db.collection(COLLECTION_NAME)
     .findOne({ _id: new ObjectId(id) })
     .then(doc => {
       if (!doc) {
@@ -61,7 +63,7 @@ app.get('/books/:id', (req, res) => {
 app.post('/books', (req, res) => {
   const book = req.body;
 
-  db.collection('books')
+  db.collection(COLLECTION_NAME)
     .insertOne(book)
     .then((result) => {
       res.status(201).json(result);
@@ -79,7 +81,7 @@ app.delete('/books/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid book ID' });
   }
 
-  db.collection('books')
+  db.collection(COLLECTION_NAME)
     .deleteOne({ _id: new ObjectId(id) })
     .then((result) => {
       console.log('Book deleted successfully');
@@ -99,7 +101,7 @@ app.patch('/books/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid book ID' });
   }
 
-  db.collection('books')
+  db.collection(COLLECTION_NAME)
     .updateOne({ _id: new ObjectId(id) }, {$set: updates})
     .then(result => {
       res.status(200).json(result);
