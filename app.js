@@ -7,6 +7,7 @@ const { ObjectId } = require('mongodb');
 const app = express();
 app.use(express.json());
 const COLLECTION_NAME = process.env.COLLECTION_NAME || 'books';
+const BOOKS_PER_PAGE = process.env.BOOKS_PER_PAGE || 20;
 
 let db;
 // DB connection
