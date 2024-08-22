@@ -1,6 +1,6 @@
-# MongoDB CRUD API - Bookstore
+# MongoDB CRUD API
 
-This Node.js backend API uses MongoDB for managing a collection of books. It supports CRUD (Create, Read, Update, Delete) operations and is designed to be easily customizable to suit your needs.
+This Node.js backend API uses MongoDB for managing a database and collection. It can be a collection of anything. For this exaple `bookstore` database and `books` collection is used . It supports CRUD (Create, Read, Update, Delete) operations and is designed to be easily customizable to suit your needs.
 
 ## Features
 
@@ -39,13 +39,16 @@ This Node.js backend API uses MongoDB for managing a collection of books. It sup
    ```
 
 3. Set up environment variables:
-   - Create a `.env` file in the root directory and add your MongoDB connection string, database name aand collection name:
+   - Create a `.env` file in the root directory and add your MongoDB connection string, database name, collection name and items per page(for pagination):
 
      ```plaintext
      MONGO_URI=mongodb://localhost:27017
      DB_NAME=bookstore
      COLLECTION_NAME=books
+     ITEMS_PER_PAGE=10
      ```
+
+     Note that COLLECTION_NAME will be used as the endpoint. In this case, requests will be made to `/books/`
 
 ### Running the Application
 
@@ -58,6 +61,8 @@ This Node.js backend API uses MongoDB for managing a collection of books. It sup
 2. The API will be running at `http://localhost:3000` (or another port if specified in your configuration).
 
 ### API Endpoints
+
+  Note that COLLECTION_NAME will be used as the endpoint. In this case, requests will be made to `/books/`
 
 - **POST /books**: Create a new book.
 - **GET /books**: Retrieve all books.
@@ -103,5 +108,3 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 - Node.js and Express.js for providing a powerful environment for backend development.
 - MongoDB for its flexible NoSQL database capabilities.
-
----
